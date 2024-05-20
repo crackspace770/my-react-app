@@ -3,24 +3,32 @@ import Button from "../Elements/Button";
 
 const FormLogin = () => {
 
-    return (
-        <form action="">
+    const handleLogin = (event) => {
+        event.preventDefault();
+        localStorage.setItem('email', event.target.email.value);
+        localStorage.setItem('password', event.target.password.value);
+        window.location.href = '/product';
+    };
 
+    return (
+        <form onSubmit={handleLogin}>
             <InputForm
-           label ="email" 
+           label ="Email" 
            type="email" 
            placeholder="example@mail.com" 
-           name = "Email"/>
+           name = "email"/>
  
          
             <InputForm 
-           label ="password" 
+           label ="Password" 
            type="password" 
            placeholder="******" 
-           name = "Password"/>
+           name = "password"/>
       
          
-         <Button>Login</Button>
+         <Button classname = "bg-blue-500 w-full" type="submit">
+            Login
+            </Button>
          
         
          </form>
