@@ -12,14 +12,14 @@ const FormLogin = () => {
 
     return (
         <form onSubmit={handleLogin}>
-            <InputForm
+        <InputForm
            label ="Email" 
            type="email" 
            placeholder="example@mail.com" 
            name = "email"/>
  
          
-            <InputForm 
+        <InputForm 
            label ="Password" 
            type="password" 
            placeholder="******" 
