@@ -3,6 +3,7 @@ import CardProduct from "../components/Fragments/CardProduct";
 import Button from "../components/Elements/Button";
 import { getProduct } from "../services/product.service";
 import { getUserName } from "../services/auth.service";
+import { useLogin } from "../hook/useLogin";
 
 
 
@@ -11,23 +12,12 @@ const ProductsPage = () => {
     const [cart, setCart] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
     const [products, setProduct] = useState([]);
-    const [usernane, setUsername] = useState("");
+    const username = useLogin();
 
    /* get data from local storage */
     useEffect(() => {  
         /*converse JSON string to javascript value*/
         setCart(JSON.parse(localStorage.getItem('cart')) || []);
-     }, []);
-
-     useEffect(() => {
-        const token = localStorage.getItem('token');
-        if(token){
-            setUsername(getUserName(token));
-        }else{
-            window.location.href = "/login";
-        
-        }
-        setUsername(getUserName(token));
      }, []);
 
      useEffect(() => {
@@ -86,7 +76,7 @@ const ProductsPage = () => {
     return (
      <Fragment>
         <div className="flex justify-end h-20 bg-blue-600 text-white items-center px-10">
-            {usernane && <p>Welcome, {usernane}</p>}
+            {username && <p>Welcome, {username}</p>}
             <Button classname="ml-5 bg-black" onClick={handleLogout}>
                 Logout
                 </Button>
@@ -98,7 +88,7 @@ const ProductsPage = () => {
         { products.length > 0 
         && products.map( (product) =>
          <CardProduct key={product.id}>
-            <CardProduct.Header image={product.image}/>
+            <CardProduct.Header image={product.image} id={product.id}/>
             <CardProduct.Body title={product.title}>
             {product.description} 
             </CardProduct.Body>

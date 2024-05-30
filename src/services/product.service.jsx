@@ -8,3 +8,14 @@ export const getProduct = async (callback) => {
         console.error(error);
     }
 };
+
+export const getDetailProduct = async (id, callback) => {
+    axios
+    .get(`https://fakestoreapi.com/products/${id}`)
+    .then((response) => {
+        callback(response.data);
+    })
+    .catch((error) => {
+        console.error(error);
+    });
+};
